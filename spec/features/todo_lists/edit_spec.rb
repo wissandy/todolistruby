@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe "Editing todo lists" do
 
-	def update_todo_list(option={})
-		option[:title] ||= "My todo list"
-		option[:description] ||= "This is my todo list"
+	def update_todo_list(options={})
+		options[:title] ||= "My todo list"
+		options[:description] ||= "This is my todo list"
 
 		todo_list = options[:todo_list]
 
@@ -13,15 +13,15 @@ describe "Editing todo lists" do
 			click_link "Edit"
 		end
 
-		fill_in "Title", with: option[:title]
-		fill_in "Description", with: option[:description]
+		fill_in "Title", with: options[:title]
+		fill_in "Description", with: options[:description]
 		click_button "Update Todo list"
 	end
 	
 	it "updates a todo list successfully with correct information" do
 		todo_list = TodoList.create(title: "groceries", description: "groceries list")
 
-		update_todo_list todo_list: todo_list, title: "New title ", description: "New description"
+		update_todo_list todo_list: todo_list, title: "New title", description: "New description"
 
 		todo_list.reload
 
